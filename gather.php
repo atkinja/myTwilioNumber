@@ -6,6 +6,6 @@ echo "<Response>";
 $formatted = implode(',',str_split($_REQUEST['Digits']));
 echo "<Say> Calling...," . $formatted . "</Say>";
 echo "<Dial callerId=\"" . $_GET['myTwilioNumber'] . "\">"; 
-echo $_REQUEST['Digits'];
+echo "+" . $_REQUEST['Digits'];
 echo "</Dial>";
 echo "</Response>";
