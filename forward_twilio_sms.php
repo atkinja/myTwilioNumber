@@ -5,10 +5,14 @@ echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
 $mycell=$_GET['myCell'];
 $myTwilioNumber=$_REQUEST['To'];
 
+
+$newBody = str_replace("&","and",$_REQUEST['Body']);
+
+
 if ($_REQUEST['From'] == $mycell ) {
-	$pos = strpos($_REQUEST['Body'], ",");
+	$pos = strpos($newBody, ",");
 	if ($pos !== false) {
-		$pieces = explode(",", $_REQUEST['Body']);
+		$pieces = explode(",", $newBody);
 		$recipient=$pieces[0]; // phone number
 		$msg_body=$pieces[1]; // body
 	} else {
@@ -20,10 +24,10 @@ if ($_REQUEST['From'] == $mycell ) {
 } else {
 	$recipient = $mycell;
 	if ($_REQUEST['MediaUrl0']) {
-		$msg_body = "<Body>" . $_REQUEST['From'] . ": " . $_REQUEST['Body'] . "</Body>";
+		$msg_body = "<Body>" . $_REQUEST['From'] . ": " . $newBody . "</Body>";
 		$mediaFile = "<Media>" . $_REQUEST['MediaUrl0'] . "</Media>";
 	} else  {
-		$msg_body = $_REQUEST['From'] . ": " . $_REQUEST['Body'];
+		$msg_body = $_REQUEST['From'] . ": " . $newBody;
 	}
 }
 
